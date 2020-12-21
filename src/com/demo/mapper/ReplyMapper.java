@@ -19,7 +19,7 @@ public interface ReplyMapper {
     @Select("select * from reply where postId = #{postId}")
     List<Reply> showReplyByPostId(@Param("postId") String postId);
 
-    @Insert("insert into reply(id,postId,replyUserId,content,time,clickCount) values(#{id},#{replyUserId},#{postId},#{content},#{time},#{clickCount}")
+    @Insert("insert into reply(id,postId,replyUserId,content,createTime,clickCount) values(#{id},#{replyUserId},#{postId},#{content},#{createTime},#{clickCount}")
     int addReply(Reply reply);
 
     @Delete("delete from reply where id=#{id}")

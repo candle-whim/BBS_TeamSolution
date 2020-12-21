@@ -11,8 +11,8 @@ public interface PostMapper {
     @Select("select * from post")
     List<Post> showAllPost();                           //查看所有帖子
 
-    @Insert("insert into post(id,userId,partId,title,content,time,lastUpdateTime,lastReplyTime,clickCount,replyCount,isTop,isHighlighted,isLocked) " +
-            "values(#{id},#{userId},#{partId},#{title},#{content},#{time},#{lastUpdateTime},#{lastReplyTime},#{clickCount},#{replyCount},#{isTop},#{isHighlighted},#{isLocked})")
+    @Insert("insert into post(id,userId,partId,title,content,createTime,lastUpdateTime,lastReplyTime,clickCount,replyCount,isTop,isHighlighted,isLocked) " +
+            "values(#{id},#{userId},#{partId},#{title},#{content},#{createTime},#{lastUpdateTime},#{lastReplyTime},#{clickCount},#{replyCount},#{isTop},#{isHighlighted},#{isLocked})")
     int addPost(Post post);                   //发帖
 
     @Delete("delete from post where id=#{id}")

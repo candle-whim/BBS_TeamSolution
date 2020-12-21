@@ -10,12 +10,26 @@
 
     <!--打开注解方式，只管理controller下的bean，其他的由Spring管理-->
     <context:component-scan base-package="com.demo.controller"/>
+
     <!--扩充注解驱动，可以将请求参数绑定到控制器参数-->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+                        <property name="failOnEmptyBeans" value="false"/>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <!--静态资源映射-->
-    <mvc:resources mapping="/css/**" location="/WEB-INF/statics/css/"></mvc:resources>
-    <mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"></mvc:resources>
-    <mvc:resources mapping="/images/**" location="/WEB-INF/statics/images/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/statics/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"/>
+    <mvc:resources mapping="/images/**" location="/WEB-INF/statics/images/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -27,12 +41,10 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/admin/toUserLogin"/>
-            <mvc:exclude-mapping path="/WEB-INF/**"/>
             <mvc:exclude-mapping path="/user/toAdminLogin"/>
             <mvc:exclude-mapping path="/user/toUserRegister"/>
-            <mvc:exclude-mapping path="/user/toLogin"/>
-            <mvc:exclude-mapping path="/module/view"/>
-            <bean class="com.demo.BBSInterceptor"></bean>
+            <mvc:exclude-mapping path="/WEB-INF/**"/>
+            <bean id="bbsInterceptor" class="com.demo.BBSInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

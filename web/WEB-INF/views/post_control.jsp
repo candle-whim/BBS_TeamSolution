@@ -1,11 +1,12 @@
-<%--
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: doris
   Date: 2020/12/19
   Time: 8:16 下午
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+         pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>发帖管理界面</title>
@@ -29,11 +30,15 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/bootstrap-theme.css" rel="stylesheet">
     <style>
+        input{font-size:12px;letter-spacing: 1px;font-family: STSong}
         input::-webkit-input-placeholder{font-size:10px;letter-spacing: 1px;font-family: STSong}
         textarea::-webkit-input-placeholder{font-size:10px;letter-spacing: 1px;font-family: STSong}
+        .modal.fade {
+            top:160px;
+        }
     </style>
 </head>
-<body onload="initAJAX();showPost();">
+<body onload="initAJAX();showPost();showM();">
 
 <%HttpSession admin_session = request.getSession();%>
 <div style="background-color: #153d82;height: 235px">
@@ -101,16 +106,39 @@
             <div class="modal-body">
                 <form action="addModule" method="get" style="letter-spacing: 1px;color: grey;margin-left: 20px;margin-right: 20px" >
                     <br>
-                    <input type="text" name="title" class="form-control input-lg input" style="width: 60%" placeholder="请输入帖子标题">
-                    <datalist id="moduleList">
+                    <table><tr><td width="400px">
+                        <input type="text" name="title" class="form-control input-lg input" placeholder="请输入帖子标题">
+                    </td>
+                    <td width="150px%">
+                    <select id="moduleList" style="width: 150px;font-size: 10px;font-family: STSong" class="form-control input-lg input" placeholder="所属板块">
                         <script>
-
+                            function showM(){
+                                xmlHttp.open("GET", "${pageContext.request.contextPath}/admin/showAllModule", true);
+                                xmlHttp.onreadystatechange = function () {
+                                    if (xmlHttp.readyState == 4) {
+                                        var data = xmlHttp.responseText;
+                                        var obj = JSON.parse(data);
+                                        var listmodule = '';
+                                        for (var i in obj) {
+                                            var modulename = obj[i].partName;
+                                            listmodule += `<option value="` + obj[i].id + `">`+modulename+`</option>`;
+                                        }
+                                        document.getElementById("moduleList").innerHTML = listmodule;
+                                    }
+                                }
+                                xmlHttp.send();
+                            }
                         </script>
-                    </datalist>
+                    </select>
+                    </td></tr></table>
+                    <input type="hidden" name="userId" value="<%=admin_session.getAttribute("admin")%>">
                     <br>
                     <input type="textarea" name="context" style="width: 100%;min-height: 200px;max-height: 200px;font-size: 14px;font-family: STSong;letter-spacing: 1px" class="form-control input-lg" placeholder="请输入帖子内容:">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="checkbox" value="1" name="isTop">置顶&emsp;
+                        <input type="checkbox" value="1" name="isHighLighted">加精&emsp;&emsp;
+
+                        <button type="button" id="submitButton" class="btn btn-default" data-dismiss="modal">关闭</button>
                         <button type="submit" class="btn btn-primary">提交</button>
                     </div>
                 </form>

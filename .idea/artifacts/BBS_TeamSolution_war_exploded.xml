@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="BBS_TeamSolution:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/BBS_TeamSolution_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="BBS_TeamSolution/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BBS_TeamSolution" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-5.2.3.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-5.2.3.RELEASE" />
+          <element id="library" level="project" name="c3p0-0.9.5.2" />
+          <element id="library" level="project" name="hamcrest-core-1.3" />
+          <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="junit-4.12" />
+          <element id="library" level="project" name="lombok-1.18.12" />
+          <element id="library" level="project" name="mchange-commons-java-0.2.11" />
+          <element id="library" level="project" name="mybatis-3.4.5" />
+          <element id="library" level="project" name="mybatis-spring-1.3.1" />
+          <element id="library" level="project" name="sqlite-jdbc-3.21.0.1" />
+          <element id="library" level="project" name="jackson-annotations-2.9.7" />
+          <element id="library" level="project" name="jackson-core-2.9.7" />
+          <element id="library" level="project" name="jackson-databind-2.9.7" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

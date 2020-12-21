@@ -52,8 +52,13 @@ public class AdminController {
         return "redirect:/user/login";
     }
 
-    @RequestMapping("/toPostControl")
+    @RequestMapping("/toUserControl")
     public String toUserControl(){
+        return "user_control";
+    }
+
+    @RequestMapping("/toPostControl")
+    public String toPostControl(){
         return "post_control";
     }
 
