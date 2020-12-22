@@ -19,4 +19,19 @@ public class UserService {
     public int deleteUserById(String id){
         return userMapper.deleteUserById(id);
     }
+
+    public User findByUserName(String name){
+        return userMapper.findByUsername(name);
+    }
+
+    public List<User> findAllUser(){return userMapper.findByUsername();}
+    public int findIdByUserName(String userName){return userMapper.findByUsername(name);}
+
+    public void addCredit(int id, int score){
+         userMapper.addCredit(id,score);
+    }
+
+    public void changeUserTypeToMaster(string id){
+        userMapper.changeUserTypeToMaster(id);
+    }
 }
