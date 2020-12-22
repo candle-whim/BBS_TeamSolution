@@ -14,4 +14,12 @@ public interface UserMapper {
     List<User> showAll();
     @Delete("delete from user where id=#{id}")
     int deleteUserById(@Param("id") String id);
+    User findByUsername(@Param("name") String name);
+    int addUser(@Param("name") String name,@Param("password") String password);
+    List<User> findAllUser();
+
+    int findIdByUserName(@Param("name") String name);
+    void addCredit(@Param("id")int id);
+    void addCredit(@Param("id")int id,@Param("score") int sore);
+    void changeUserTypeToMaster(@Param("id") int id);
 }
