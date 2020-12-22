@@ -18,5 +18,6 @@ public class User {
     private string signature;
     private int sex;
     private string telephone;
+    private String briefIntro;
+    private Date birthday;
 }
-
